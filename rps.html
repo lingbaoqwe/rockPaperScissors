@@ -1,0 +1,57 @@
+<script>
+    let choice=["rock","paper","scissors"];
+    let score=0;
+    function computerPlay(){
+        let num=Math.floor(Math.random()*3);
+        return choice[num];
+    }
+    function playRound(playerSelection,computerSelection){
+        playerSelection==""? playerSelection="rock":playerSelection.toLowerCase();
+        console.log(playerSelection);
+        let result=true;
+        let tie=false;
+        let str;
+        if (playerSelection==computerSelection){
+            tie=true;
+        }
+        else if(playerSelection=="rock"){
+            if(computerSelection=="paper"){
+                result=false;
+            }
+        }
+        else if(playerSelection=="paper"){
+            if(computerSelection=="scissors"){
+                result=false;
+            }
+        }
+        else if(computerSelection=="rock"){
+            result=false;
+        }
+        if(tie==true){
+            str=`tie! ${playerSelection} and ${computerSelection}`;
+        }
+        else if(result==true){
+            score++;
+            str=`you win!${playerSelection} beats ${computerSelection}! your current score is: ${score}`;
+        }
+        else{
+            score--;
+            str=`you lose!${computerSelection} beats ${playerSelection}! your current score is: ${score}`;
+        }
+        return str;
+    }
+    function game(){
+        let playerSelection;
+        for(let i=0;i<5;i++){
+            playerSelection=window.prompt("pick one: rock paper scissors (default: rock)");
+            console.log("round "+i+"! "+playRound(playerSelection,computerPlay()));
+        }
+        if(score>0){
+            console.log("you have won! you final score is: "+score);
+        }
+        else{
+            console.log("you have lost! you final score is: "+score);
+        }
+    }
+    game();
+</script>
